@@ -118,7 +118,7 @@ private:
 				/* 
 				 *	Desirable window found - trying to minimize it.
 				 *	While there is still at least 1 element
-				 *	of each time, remove the leftmost (pointed by j).
+				 *	of each type, remove the leftmost (pointed by j).
 				 */
 				while (count[inner[j].second] > 1 and j < i) {
 					count[inner[j].second]--;
