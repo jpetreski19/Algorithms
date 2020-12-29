@@ -72,9 +72,9 @@ private:
 		// There is room for improvement otherwise
 
 
-		vector<pair<int, int> > inner;	// Holds the leftmost and rightmost
-										// positions of each element type
-										// in this range (first = pos, second = type).
+		vector<pair<int, int> > inner;	// Holds the innermost positions
+													// of each element type in this range
+													// (first = pos, second = type).
 
 		for (int i = 1; i <= K; i++) {
 			// Build the case where the shortest segment is accross both children
@@ -98,12 +98,12 @@ private:
 
 		
 		sort(inner.begin(), inner.end());	// Sort the elements by their position 
-											// in the array (first element in pair).
+														// in the array (first element in pair).
 
-		vector<int> count(K + 1, 0);		// count[x] - holds the number of times element
-											// of type x is contained in the window so far.
+		vector<int> count(K + 1, 0);	// count[x] - holds the number of times element
+												// of type x is contained in the window so far.
 
-						// i - right pointer
+							// i - right pointer
 		int j = 0;		// Left pointer
 		int found = 0;
 
@@ -179,8 +179,8 @@ public:
 			min_pos[array[index]] = INT_MAX;
 			max_pos[array[index]] = -1;
 			
-			array[index] = new_val; // Array should be updated too
-									// (needed for updates in the future)
+			array[index] = new_val;	// Array should be updated too
+											// (needed for updates in the future)
 
 			// Set new values
 			min_pos[new_val] = index;
