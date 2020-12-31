@@ -75,20 +75,17 @@ int solve(int nodes, int edges, int budget) {
 		curr = Q.top();
 		Q.pop();
 
-		if (curr.cost > budget)
+		if (curr.cost > budget or dist[curr.x].size() >= K) {
 			continue;
-        if (dist[curr.x].size() >= K)
-            continue;
+		}
 
 		dist[curr.x].pb(curr.dist);
 		cost[curr.x].pb(curr.cost);
 
 		for (int i = 0; i < (int)adj[curr.x].size(); i++) {
-
-			if (curr.cost + adj[curr.x][i].cost > budget)
+			if (curr.cost + adj[curr.x][i].cost > budget or dist[adj[curr.x][i].neightbour].size() == K) {
 				continue;
-			if (dist[adj[curr.x][i].neightbour].size() == K) 
-                continue;
+			}
 
 			Q.push(node(adj[curr.x][i].neightbour, 
 					curr.dist + adj[curr.x][i].dist,
@@ -99,13 +96,15 @@ int solve(int nodes, int edges, int budget) {
 	int res = INT_MAX;
 	for (int i = 0; i < (int)dist[nodes - 1].size(); i++) {
 		if (cost[nodes - 1][i] <= budget) {
-            res = min(res, dist[nodes - 1][i]);
-        }
+			res = min(res, dist[nodes - 1][i]);
+		}
 	}
 
 	// No path with cost <= K found
-	if (res == INT_MAX)
+	if (res == INT_MAX){
 		res = -1;
+	}
+
 	return res;
 }
 
