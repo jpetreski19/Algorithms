@@ -154,7 +154,7 @@ int Graph::get_num_scc() {
 
   // Reset entries of visited
   fill(visited.begin(), visited.end(), false);
-  int num_components = 0;
+  int num_scc = 0;
 
   while (!stack_t.empty()) {
     int curr = stack_t.top();
@@ -162,12 +162,12 @@ int Graph::get_num_scc() {
 
     if (!visited[curr]) {
       // New scc
-      num_components++;
+      num_scc++;
       dfs(curr);
     }
   }
 
-  return num_components;
+  return num_scc;
 }
 
 bool Graph::all_pairs_reachable() {
