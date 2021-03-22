@@ -10,7 +10,6 @@
  */
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
 #include <stack>
 
@@ -32,13 +31,13 @@ private:
                                   // when traversing the graph.
 
   /**
-   *  Traverses the graph and gets order of visited
-   *  vertices in a stack. The vertex from which
+   *  Traverses the graph (in DFS manner) and gets order of
+   *  visited vertices in a stack. The vertex from which
    *  the algorithm starts is the front of the stack.
    *
    *  Param: curr - the index of the current node being explored.
    */
-  void get_order(int curr);
+  void get_ordering(int curr);
 
   /**
    *  Performs a simple DFS traversal over the
@@ -119,13 +118,13 @@ void Graph::add_edge(int x, int y) {
   reversed[y].push_back(x);   // Flipped direction
 }
 
-void Graph::get_order(int curr) {
+void Graph::get_ordering(int curr) {
   visited[curr] = true;
 
   for (int i = 0; i < (int)neighbour[curr].size(); i++) {
     int next = neighbour[curr][i];
     if (!visited[next]) {
-      get_order(next);
+      get_ordering(next);
     }
   }
 
@@ -148,7 +147,7 @@ int Graph::get_num_scc() {
   for (int i = 0; i < num_nodes; i++) {
     if (!visited[i]) {
       // New graph component (graph is a forest)
-      get_order(i);
+      get_ordering(i);
     }
   }
 
